@@ -10,6 +10,11 @@ export const ItemList = styled.div`
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
+`;
+
+export const Item = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
 
@@ -18,7 +23,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Item = styled.a`
+export const ItemContainer = styled.a`
   background-color: #291f65;
   height: 80px;
   margin-right: 20px;
