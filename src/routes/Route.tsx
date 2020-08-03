@@ -2,20 +2,21 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from '../components/Layout';
 
-interface ComponentProps {
+interface Props {
   component: React.FC;
   path: string;
   exact?: boolean;
 }
 
-const RouteWrapper: React.FC<ComponentProps> = (
-  { component: Component },
-  rest,
-) => (
+const RouteWrapper: React.FC<Props> = (
+  { component: Component, ...rest }
+) => {
+
+  return (
   <Route
-    {...rest}
+   {...rest}
     render={props => <Layout component={Component} {...props} />}
   />
-);
+)};
 
 export default RouteWrapper;

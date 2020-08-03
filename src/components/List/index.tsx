@@ -12,17 +12,18 @@ import {
 } from './styles';
 import IItemDataDTO from '../../DTOs/IItemDataDTO';
 
-interface IItemRequest {
+interface Props {
   itemList: [IItemDataDTO] | undefined;
+  URLLink?: string;
 }
 
-const List: React.FC<IItemRequest> = ({ itemList }) => {
+const List: React.FC<Props> = ({ itemList, URLLink }) => {
   return (
     <ItemList>
       <Container>
         {itemList?.map((i: IItemDataDTO) => (
           <Item key={i.id}>
-            <ItemContainer>
+            <ItemContainer href={`http://localhost:3000/${URLLink}/${i.id}`}>
               <TextContainer>
                 <strong>{i.name}</strong>
                 {i.description ? <span>{i.description}</span> : null}
