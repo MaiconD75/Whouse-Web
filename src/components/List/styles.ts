@@ -30,6 +30,7 @@ export const ItemContainer = styled.a`
   width: 100%;
   padding: 15px;
   border-radius: 12px;
+  text-decoration: none;
   display: flex;
   justify-content: space-between;
   align-items: center;

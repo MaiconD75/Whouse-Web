@@ -7,6 +7,7 @@ interface ComponentProps {
 }
 
 const Layout: React.FC<ComponentProps> = ({ component: Component }, props) => {
+
   return (
     <Background>
       <MainContainer>

@@ -5,12 +5,8 @@ import AddButton from '../../components/Buttons/AddButton';
 import api from '../../services/api';
 import IItemDataDTO from '../../DTOs/IItemDataDTO';
 
-interface IWarehouseData {
-  warehouseItem: IItemDataDTO;
-}
-
 const Warehouse: React.FC = () => {
-  const [warehousesData, setWarehousesData] = useState<[IItemDataDTO]>();
+  const [warehousesList, setWarehousesList] = useState<[IItemDataDTO]>();
 
   useEffect(() => {
     async function loadWarehouses() {
@@ -22,7 +18,7 @@ const Warehouse: React.FC = () => {
         description: warehouse.description,
       }));
 
-      setWarehousesData(data);
+      setWarehousesList(data);
     }
 
     loadWarehouses();
@@ -30,7 +26,7 @@ const Warehouse: React.FC = () => {
 
   return (
     <>
-      <List itemList={warehousesData} />
+      <List itemList={warehousesList} URLLink="stocks" />
       <AddButton>+</AddButton>
     </>
   );
