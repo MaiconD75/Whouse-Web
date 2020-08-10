@@ -27,7 +27,7 @@ const Stock: React.FC = () => {
     }
 
     loadStocks();
-  }, []);
+  }, [params.warehouseId]);
 
   return (
     <>

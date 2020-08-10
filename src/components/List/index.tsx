@@ -28,10 +28,10 @@ const List: React.FC<Props> = ({ itemList, URLLink }) => {
                 <strong>{i.name}</strong>
                 {i.description ? <span>{i.description}</span> : null}
               </TextContainer>
-              <FiChevronRight color="#EEE" fontSize={30} />
+              <FiChevronRight color="#EEE" fontSize={'1.4rem'} />
             </ItemContainer>
             <EditButton>
-              <FiEdit3 color="#EEE" fontSize={30} />
+              <FiEdit3 color="#EEE" fontSize={'1.4rem'} />
             </EditButton>
           </Item>
         ))}
