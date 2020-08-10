@@ -23,7 +23,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font: 16px Roboto, sans-serif;
+    font: 1rem Roboto, sans-serif;
     color: #eee;
   }
 
