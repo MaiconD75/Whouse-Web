@@ -13,10 +13,11 @@ const RouteWrapper: React.FC<Props> = (
 ) => {
 
   return (
-  <Route
-   {...rest}
-    render={props => <Layout component={Component} {...props} />}
-  />
-)};
+    <Route
+      {...rest}
+      render={props => <Layout {...props}> <Component /> </Layout>}
+    />
+  )
+};
 
 export default RouteWrapper;

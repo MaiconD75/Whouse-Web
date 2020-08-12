@@ -2,16 +2,13 @@ import React from 'react';
 
 import { Background, MainContainer } from './styles';
 
-interface ComponentProps {
-  component: React.FC;
-}
 
-const Layout: React.FC<ComponentProps> = ({ component: Component }, props) => {
+const Layout: React.FC = ({ children }) => {
 
   return (
     <Background>
       <MainContainer>
-        <Component {...props} />
+        {children}
       </MainContainer>
     </Background>
   );
