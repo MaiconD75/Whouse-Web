@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background-color: #3b9520;
+  background-color: ${props => props.theme.colors.primaryDark};
   position: fixed;
   top: 100%;
   left: 50%;
@@ -9,7 +9,7 @@ export const Button = styled.button`
   transform: translate(-50%, -70%);
   height: 4rem;
   width: 4rem;
-  border: none;
+  border: 3px solid ${props => props.theme.colors.green};
   border-radius: 50%;
   box-shadow: 0 0.3rem 0.8rem #3295203f;
   transition: 250ms;
