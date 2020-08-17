@@ -31,7 +31,7 @@ const Stock: React.FC = () => {
 
   return (
     <>
-      <List itemList={stocksList}/>
+      <List itemList={stocksList} />
       <AddButton>+</AddButton>
     </>
   );

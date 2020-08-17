@@ -1,30 +1,10 @@
 import styled from 'styled-components';
 
-export const ItemList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  width: 100%;
-  flex: 1;
-  padding: 1rem;
-  padding-right: 0;
-
-  @media (min-width: 700px) {
-    padding: 2rem;
-    padding-right: 0;
-  }
-`;
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const Item = styled.div`
   display: flex;
   overflow: none;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 
   & + div {
     margin-top: 0.8rem;
@@ -38,13 +18,14 @@ export const Item = styled.div`
 `;
 
 export const ItemContainer = styled.a`
-  background-color: #291f65;
+  border: 3px solid ${props => props.theme.colors.primaryLight};
+  background-color: ${props => props.theme.colors.primaryDark};
+  width: 80%;
   height: 5.4rem;
-  margin-right: 0.8rem;
-  width: 75vw;
   padding: 0.8rem;
   border-radius: 0.8rem;
   text-decoration: none;
+  margin-right: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,9 +37,6 @@ export const ItemContainer = styled.a`
       box-shadow: -1rem 1rem 1rem #372e6132;
       transform: translate(1rem, -1rem);
     }
-    margin-right: 1.2rem;
-    padding: 1rem;
-    max-width: 85%;
   }
 
   cursor: pointer;
@@ -73,7 +51,7 @@ export const TextContainer = styled.div`
   justify-content: space-between;
 
   strong {
-    color: #eee;
+    color: ${props => props.theme.colors.textLight};
     font-size: 1.4rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -82,7 +60,7 @@ export const TextContainer = styled.div`
   }
 
   span {
-    color: #acb;
+    color: ${props => props.theme.colors.textDark};
     font-size: 0.8rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -93,12 +71,13 @@ export const TextContainer = styled.div`
 `;
 
 export const EditButton = styled.button`
-  background-color: #acc026;
+  position: static;
+  border: 3px solid ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.primaryDark};
   display: flex;
-  flex: 1;
+  width: 15%;
   align-items: center;
   justify-content: center;
-  border: none;
   border-radius: 3rem 0 0 3rem;
   box-shadow: 0 0 0.5rem #3e481991;
   transition: 250ms;
