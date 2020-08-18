@@ -4,18 +4,18 @@ import { FiChevronRight, FiEdit3 } from 'react-icons/fi';
 
 import { Item, ItemContainer, EditButton, TextContainer } from './styles';
 
-import IItemDataDTO from '../../DTOs/IItemDataDTO';
+import IItemData from '../../utils/interfaces/IItemData';
 import ListContainer from '../ListContainer';
 
 interface Props {
-  itemList: [IItemDataDTO] | undefined;
+  itemList: [IItemData] | undefined;
   URLLink?: string;
 }
 
 const List: React.FC<Props> = ({ itemList, URLLink }) => {
   return (
     <ListContainer withoutRighPadding>
-      {itemList?.map((i: IItemDataDTO) => (
+      {itemList?.map((i: IItemData) => (
         <Item key={i.id}>
           <ItemContainer href={`http://localhost:3000/${URLLink}/${i.id}`}>
             <TextContainer>

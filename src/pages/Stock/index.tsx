@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 
 import List from '../../components/List';
 import AddButton from '../../components/Buttons/AddButton';
-import IItemDataDTO from '../../DTOs/IItemDataDTO';
+import IItemData from '../../utils/interfaces/IItemData';
 import api from '../../services/api';
 
 interface IStockParams {
@@ -11,14 +11,14 @@ interface IStockParams {
 }
 
 const Stock: React.FC = () => {
-  const [stocksList, setStocksList] = useState<[IItemDataDTO]>();
+  const [stocksList, setStocksList] = useState<[IItemData]>();
   const { params } = useRouteMatch<IStockParams>();
 
   useEffect(() => {
     async function loadStocks() {
       const response = await api.get(`warehouses/${params.warehouseId}`);
 
-      const data = response.data.stocks.map((stock: IItemDataDTO) => ({
+      const data = response.data.stocks.map((stock: IItemData) => ({
         id: stock.id,
         name: stock.name,
       }));
@@ -31,7 +31,7 @@ const Stock: React.FC = () => {
 
   return (
     <>
-      <List itemList={stocksList} />
+      <List URLLink="products" itemList={stocksList} />
       <AddButton>+</AddButton>
     </>
   );

@@ -1,81 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 
-import {
-  Container,
-  ProductItem,
-  TextContent,
-  Amount,
-  SaveButton,
-  EditContainer,
-} from './styles';
-
+import ProductList from '../../components/ProductList';
 import AddButton from '../../components/Buttons/AddButton';
-import ListContainer from '../../components/ListContainer';
+import IProductData from '../../utils/interfaces/IProductData';
+import api from '../../services/api';
+
+interface IProductsParams {
+  stockId: string;
+}
 
 const Product: React.FC = () => {
+  const [productList, setProductList] = useState<[IProductData]>();
+  const { params } = useRouteMatch<IProductsParams>();
+
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await api.get(`stocks/${params.stockId}`);
+
+      const data = response.data.products.map((product: IProductData) => {
+        const product_image = product.product_image
+          ? `http://localhost:3333/files/${product.product_image}`
+          : undefined;
+        console.log(product_image);
+        return {
+          id: product.id,
+          name: product.name,
+          specification: product.specification,
+          amount: product.amount,
+          product_image,
+        };
+      });
+
+      setProductList(data);
+    }
+
+    loadProducts();
+  }, [params.stockId]);
+
   return (
-    <Container>
-      <ListContainer>
-        <ProductItem>
-          {' '}
-          <img
-            alt="resistor"
-            src="https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/c/f/cfr-25jb-10k.jpg"
-          />
-          <TextContent>
-            <strong>Resitor 10 </strong>
-            <span>Resistor de 10kOhm </span>
-          </TextContent>
-          <EditContainer>
-            <Amount>
-              <button type="button">+</button>
-              <input value="1000" />
-              <button type="button">-</button>
-            </Amount>
-            <SaveButton>save</SaveButton>
-          </EditContainer>
-        </ProductItem>
-        <ProductItem>
-          {' '}
-          <img
-            alt="resistor"
-            src="https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/c/f/cfr-25jb-10k.jpg"
-          />
-          <TextContent>
-            <strong>Resitor 10</strong>
-            <span>Resistor de 10kOhm</span>
-          </TextContent>
-          <EditContainer>
-            <Amount>
-              <button type="button">+</button>
-              <input value="5" />
-              <button type="button">-</button>
-            </Amount>
-            <SaveButton>save</SaveButton>
-          </EditContainer>
-        </ProductItem>
-        <ProductItem>
-          {' '}
-          <img
-            alt="resistor"
-            src="https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/c/f/cfr-25jb-10k.jpg"
-          />
-          <TextContent>
-            <strong>Resitor 10</strong>
-            <span>Resistor de 10kOhm</span>
-          </TextContent>
-          <EditContainer>
-            <Amount>
-              <button type="button">+</button>
-              <input value="5" />
-              <button type="button">-</button>
-            </Amount>
-            <SaveButton>save</SaveButton>
-          </EditContainer>
-        </ProductItem>
-      </ListContainer>
+    <>
+      <ProductList productList={productList} />
       <AddButton>+</AddButton>
-    </Container>
+    </>
   );
 };
 

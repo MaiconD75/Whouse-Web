@@ -22,6 +22,7 @@ export const ProductItem = styled.li`
     width: 4rem;
     height: 4rem;
     border-radius: 1.2rem;
+    background-color: #999;
   }
 
   & + li {
