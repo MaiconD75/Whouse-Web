@@ -5,13 +5,16 @@ import { ThemeProvider } from 'styled-components';
 import Routes from './routes/index';
 import defaultTheme from './styles/themes/defaultTheme';
 import GlobalStyle from './styles/global';
+import { FormProvider } from './hooks/FormContext';
 
 const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
         <BrowserRouter>
-          <Routes />
+          <FormProvider>
+            <Routes />
+          </FormProvider>
         </BrowserRouter>
         <GlobalStyle />
       </ThemeProvider>

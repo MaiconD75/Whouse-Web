@@ -1,31 +1,26 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import * as Yup from 'yup';
 
 import { Unform, UnformModal, InputContainer } from './styles';
 
-import api from '../../services/api';
+import { useForm } from '../../hooks/FormContext';
 
-import AddButton from '../Buttons/AddButton';
 import getvalidationError from '../../utils/getValidationErrors';
 
-interface IFormData {
-  name: string;
-  description?: string;
-}
-
 interface IFormProps {
+  itemType: string;
   schema: Yup.ObjectSchema<
     Yup.Shape<Record<string, unknown> | undefined, Record<string, unknown>>
   >;
 }
 
-const Form: React.FC<IFormProps> = ({ children, schema }) => {
-  const [formIsOpen, setFormIsOpen] = useState(false);
-
+const Form: React.FC<IFormProps> = ({ children, schema, itemType }) => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit: SubmitHandler<IFormData> = useCallback(
+  const { saveItem, formIsOpen, changeFormOpenState } = useForm();
+
+  const handleSubmit: SubmitHandler<Record<string, unknown>> = useCallback(
     async (data, { reset }) => {
       try {
         formRef.current?.setErrors({});
@@ -34,7 +29,7 @@ const Form: React.FC<IFormProps> = ({ children, schema }) => {
           abortEarly: false,
         });
 
-        await api.post('warehouses', data);
+        saveItem({ itemType, data });
 
         reset();
       } catch (err) {
@@ -43,16 +38,16 @@ const Form: React.FC<IFormProps> = ({ children, schema }) => {
         formRef.current?.setErrors(errors);
       }
     },
-    [schema],
+    [schema, saveItem, itemType],
   );
-
-  const ChangeOpenForm = () => {
-    setFormIsOpen(!formIsOpen);
-  };
 
   return (
     <>
-      <UnformModal disableScrollLock open={formIsOpen} onClose={ChangeOpenForm}>
+      <UnformModal
+        disableScrollLock
+        open={formIsOpen}
+        onClose={changeFormOpenState}
+      >
         <div>
           <Unform autoComplete="off" onSubmit={handleSubmit} ref={formRef}>
             <InputContainer>{children}</InputContainer>
@@ -61,7 +56,6 @@ const Form: React.FC<IFormProps> = ({ children, schema }) => {
           </Unform>
         </div>
       </UnformModal>
-      <AddButton onClick={ChangeOpenForm}>+</AddButton>
     </>
   );
 };
