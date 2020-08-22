@@ -8,16 +8,17 @@ interface Props {
   exact?: boolean;
 }
 
-const RouteWrapper: React.FC<Props> = (
-  { component: Component, ...rest }
-) => {
-
+const RouteWrapper: React.FC<Props> = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => <Layout {...props}> <Component /> </Layout>}
+      render={props => (
+        <Layout {...props}>
+          <Component />
+        </Layout>
+      )}
     />
-  )
+  );
 };
 
 export default RouteWrapper;

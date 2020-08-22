@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
 import { Button } from './styles';
 
-const AddButton: React.FC = () => {
-  return <Button>+</Button>;
+type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+const AddButton: React.FC<IButtonProps> = props => {
+  return (
+    <Button type="button" {...props}>
+      +
+    </Button>
+  );
 };
 
 export default AddButton;
