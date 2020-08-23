@@ -1,8 +1,14 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import * as Yup from 'yup';
 
-import { Unform, UnformModal, InputContainer } from './styles';
+import {
+  Unform,
+  UnformModal,
+  InputContainer,
+  ButtonContainer,
+  DeleteButton,
+} from './styles';
 
 import { useForm } from '../../hooks/FormContext';
 
@@ -24,9 +30,19 @@ const Form: React.FC<IFormProps> = ({
   itemType,
   initialData,
 }) => {
+  const [editForm, setEditForm] = useState(false);
+
   const formRef = useRef<FormHandles>(null);
 
-  const { saveItem, formIsOpen, changeFormOpenState } = useForm();
+  const { saveItem, formIsOpen, changeFormOpenState, deleteItem } = useForm();
+
+  useEffect(() => {
+    if (initialData) {
+      setEditForm(true);
+    } else {
+      setEditForm(false);
+    }
+  }, [initialData]);
 
   const handleSubmit: SubmitHandler<Record<string, unknown>> = useCallback(
     async (data, { reset }) => {
@@ -68,7 +84,17 @@ const Form: React.FC<IFormProps> = ({
           >
             <InputContainer>{children}</InputContainer>
 
-            <button type="submit">Cadastrar</button>
+            <ButtonContainer>
+              <button type="submit">Salvar</button>
+              {editForm && (
+                <DeleteButton
+                  type="button"
+                  onClick={() => deleteItem({ id: initialData?.id, itemType })}
+                >
+                  Deletar
+                </DeleteButton>
+              )}
+            </ButtonContainer>
           </Unform>
         </div>
       </UnformModal>

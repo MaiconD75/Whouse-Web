@@ -18,7 +18,7 @@ const schema = Yup.object().shape({
 const Warehouse: React.FC = () => {
   const [warehousesList, setWarehousesList] = useState<[IItemData]>();
 
-  const { newItem, initialData } = useForm();
+  const { newItem, initialData, deletedItem } = useForm();
 
   useEffect(() => {
     async function loadWarehouses() {
@@ -34,7 +34,7 @@ const Warehouse: React.FC = () => {
     }
 
     loadWarehouses();
-  }, [newItem]);
+  }, [newItem, deletedItem]);
   return (
     <>
       <Form schema={schema} initialData={initialData} itemType="warehouses">

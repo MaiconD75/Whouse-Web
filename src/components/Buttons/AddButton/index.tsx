@@ -10,7 +10,7 @@ const AddButton: React.FC<IButtonProps> = () => {
   const { changeFormOpenState } = useForm();
 
   return (
-    <Button type="button" onClick={() => changeFormOpenState()}>
+    <Button type="button" onClick={() => changeFormOpenState(undefined)}>
       +
     </Button>
   );
