@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FiChevronRight, FiEdit3 } from 'react-icons/fi';
 
+import { useForm } from '../../hooks/FormContext';
+
 import { Item, ItemContainer, EditButton, TextContainer } from './styles';
 
 import IItemData from '../../utils/interfaces/IItemData';
@@ -13,6 +15,8 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({ itemList, URLLink }) => {
+  const { changeFormOpenState } = useForm();
+
   return (
     <ListContainer withoutRighPadding>
       {itemList?.map((i: IItemData) => (
@@ -24,7 +28,7 @@ const List: React.FC<Props> = ({ itemList, URLLink }) => {
             </TextContainer>
             <FiChevronRight color="#EEE" fontSize="1.4rem" />
           </ItemContainer>
-          <EditButton>
+          <EditButton onClick={() => changeFormOpenState(i)}>
             <FiEdit3 color="#EEE" fontSize="1.4rem" />
           </EditButton>
         </Item>

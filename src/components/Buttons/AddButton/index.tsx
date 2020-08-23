@@ -1,12 +1,16 @@
 import React, { ButtonHTMLAttributes } from 'react';
 
+import { useForm } from '../../../hooks/FormContext';
+
 import { Button } from './styles';
 
 type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const AddButton: React.FC<IButtonProps> = props => {
+const AddButton: React.FC<IButtonProps> = () => {
+  const { changeFormOpenState } = useForm();
+
   return (
-    <Button type="button" {...props}>
+    <Button type="button" onClick={() => changeFormOpenState()}>
       +
     </Button>
   );
