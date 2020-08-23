@@ -7,15 +7,23 @@ import { Unform, UnformModal, InputContainer } from './styles';
 import { useForm } from '../../hooks/FormContext';
 
 import getvalidationError from '../../utils/getValidationErrors';
+import IItemData from '../../utils/interfaces/IItemData';
+import IProductData from '../../utils/interfaces/IProductData';
 
 interface IFormProps {
   itemType: string;
+  initialData?: IItemData | IProductData;
   schema: Yup.ObjectSchema<
     Yup.Shape<Record<string, unknown> | undefined, Record<string, unknown>>
   >;
 }
 
-const Form: React.FC<IFormProps> = ({ children, schema, itemType }) => {
+const Form: React.FC<IFormProps> = ({
+  children,
+  schema,
+  itemType,
+  initialData,
+}) => {
   const formRef = useRef<FormHandles>(null);
 
   const { saveItem, formIsOpen, changeFormOpenState } = useForm();
@@ -29,27 +37,35 @@ const Form: React.FC<IFormProps> = ({ children, schema, itemType }) => {
           abortEarly: false,
         });
 
-        saveItem({ itemType, data });
+        const id = initialData?.id;
 
-        reset();
+        saveItem({ itemType, data, id });
+
+        if (!initialData) {
+          reset();
+        }
       } catch (err) {
         const errors = getvalidationError(err);
 
         formRef.current?.setErrors(errors);
       }
     },
-    [schema, saveItem, itemType],
+    [schema, saveItem, itemType, initialData],
   );
-
   return (
     <>
       <UnformModal
         disableScrollLock
         open={formIsOpen}
-        onClose={changeFormOpenState}
+        onClose={() => changeFormOpenState()}
       >
         <div>
-          <Unform autoComplete="off" onSubmit={handleSubmit} ref={formRef}>
+          <Unform
+            autoComplete="off"
+            initialData={initialData}
+            onSubmit={handleSubmit}
+            ref={formRef}
+          >
             <InputContainer>{children}</InputContainer>
 
             <button type="submit">Cadastrar</button>

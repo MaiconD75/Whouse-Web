@@ -1,4 +1,4 @@
-export default interface IItemDataDTO {
+export default interface IItemData {
   id: string;
   name: string;
   description?: string;
