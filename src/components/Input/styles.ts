@@ -6,7 +6,7 @@ export const InputBlock = styled.div`
   flex-direction: column;
 
   label {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: ${props => props.theme.colors.textLight};
     border-bottom: 1px solid ${props => props.theme.colors.secondaryDark};
     padding-bottom: 0.4rem;
@@ -25,7 +25,7 @@ export const InputBlock = styled.div`
   }
 
   span {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     color: ${props => props.theme.colors.red};
     margin-bottom: 0.4rem;
   }

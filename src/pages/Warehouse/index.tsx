@@ -35,6 +35,7 @@ const Warehouse: React.FC = () => {
 
     loadWarehouses();
   }, [newItem, deletedItem]);
+
   return (
     <>
       <Form schema={schema} initialData={initialData} itemType="warehouses">
