@@ -5,7 +5,7 @@ import { InputBlock } from './styles';
 
 interface Props {
   name: string;
-  label: string;
+  label?: string;
 }
 
 type IInputProps = JSX.IntrinsicElements['input'] & Props;
@@ -25,7 +25,7 @@ const Input: React.FC<IInputProps> = ({ name, label, ...rest }) => {
 
   return (
     <InputBlock>
-      <label htmlFor={fieldName}>{label}</label>
+      {label && <label htmlFor={fieldName}>{label}</label>}
       {error && <span className="error">{error}</span>}
       <input
         id={fieldName}

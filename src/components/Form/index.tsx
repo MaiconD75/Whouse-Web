@@ -19,6 +19,7 @@ import IProductData from '../../utils/interfaces/IProductData';
 interface IFormProps {
   itemType: string;
   initialData?: IItemData | IProductData;
+  unresetContent?: Record<string, unknown>;
   schema: Yup.ObjectSchema<
     Yup.Shape<Record<string, unknown> | undefined, Record<string, unknown>>
   >;
@@ -27,6 +28,7 @@ interface IFormProps {
 const Form: React.FC<IFormProps> = ({
   children,
   schema,
+  unresetContent,
   itemType,
   initialData,
 }) => {
@@ -58,7 +60,7 @@ const Form: React.FC<IFormProps> = ({
         saveItem({ itemType, data, id });
 
         if (!initialData) {
-          reset();
+          reset(unresetContent);
         }
       } catch (err) {
         const errors = getvalidationError(err);
@@ -66,7 +68,7 @@ const Form: React.FC<IFormProps> = ({
         formRef.current?.setErrors(errors);
       }
     },
-    [schema, saveItem, itemType, initialData],
+    [schema, saveItem, itemType, initialData, unresetContent],
   );
   return (
     <>

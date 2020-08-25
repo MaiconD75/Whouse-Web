@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import * as Yup from 'yup';
 
-import List from '../../components/List';
-import AddButton from '../../components/Buttons/AddButton';
 import IItemData from '../../utils/interfaces/IItemData';
 import api from '../../services/api';
+
+import AddButton from '../../components/Buttons/AddButton';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import List from '../../components/List';
+import { useForm } from '../../hooks/FormContext';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome obrigatório'),
+  warehouse_id: Yup.string().required(),
+});
 
 interface IStockParams {
   warehouseId: string;
@@ -12,7 +22,10 @@ interface IStockParams {
 
 const Stock: React.FC = () => {
   const [stocksList, setStocksList] = useState<[IItemData]>();
+
   const { params } = useRouteMatch<IStockParams>();
+
+  const { newItem, initialData, deletedItem } = useForm();
 
   useEffect(() => {
     async function loadStocks() {
@@ -27,10 +40,24 @@ const Stock: React.FC = () => {
     }
 
     loadStocks();
-  }, [params.warehouseId]);
+  }, [params.warehouseId, newItem, deletedItem]);
 
   return (
     <>
+      <Form
+        itemType="stocks"
+        unresetContent={{ warehouse_id: params.warehouseId }}
+        initialData={initialData}
+        schema={schema}
+      >
+        <Input
+          name="warehouse_id"
+          type="hidden"
+          value={params.warehouseId}
+          readOnly
+        />
+        <Input name="name" type="text" label="Nome" />
+      </Form>
       <List URLLink="products" itemList={stocksList} />
       <AddButton>+</AddButton>
     </>
