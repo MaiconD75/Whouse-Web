@@ -28,7 +28,7 @@ const List: React.FC<Props> = ({ itemList, URLLink }) => {
             </TextContainer>
             <FiChevronRight color="#EEE" fontSize="1.4rem" />
           </ItemContainer>
-          <EditButton onClick={() => changeFormOpenState(i)}>
+          <EditButton type="button" onClick={() => changeFormOpenState(i)}>
             <FiEdit3 color="#EEE" fontSize="1.4rem" />
           </EditButton>
         </Item>

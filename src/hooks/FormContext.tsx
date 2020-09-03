@@ -17,12 +17,16 @@ interface IDeleteCreditials {
 
 interface IFormContextData {
   newItem: Record<string, unknown>;
-  initialData: IItemData | IProductData | undefined;
+  initialItemData: IItemData | undefined;
+  initialProductData: IProductData | undefined;
   formIsOpen: boolean;
   deletedItem: string | undefined;
   saveItem(credentials: ISaveCreditials): Promise<void>;
   deleteItem(credentials: IDeleteCreditials): Promise<void>;
-  changeFormOpenState(initialData?: IItemData | IProductData | undefined): void;
+  changeFormOpenState(
+    initialItemData?: IItemData,
+    initialProductData?: IProductData,
+  ): void;
 }
 
 const FormContext = createContext<IFormContextData>({} as IFormContextData);
@@ -31,7 +35,8 @@ const FormProvider: React.FC = ({ children }) => {
   const [savedItem, setSavedItem] = useState({});
   const [deletedItem, setDeletedItem] = useState<string | undefined>('');
   const [formOpen, setFormOpen] = useState(false);
-  const [toEditData, setToEditData] = useState<IItemData | IProductData>();
+  const [toEditItemData, setToEditItemData] = useState<IItemData>();
+  const [toEditProductData, setToEditProductData] = useState<IProductData>();
 
   const saveItem = useCallback(
     async ({ itemType, data, id }: ISaveCreditials) => {
@@ -46,10 +51,12 @@ const FormProvider: React.FC = ({ children }) => {
   );
 
   const changeFormOpenState = useCallback(
-    (initialData?: IItemData | IProductData | undefined) => {
+    (initialItemData?: IItemData, initialProductData?: IProductData) => {
       setFormOpen(!formOpen);
 
-      setToEditData(initialData);
+      setToEditItemData(initialItemData);
+
+      setToEditProductData(initialProductData);
     },
     [formOpen],
   );
@@ -70,7 +77,8 @@ const FormProvider: React.FC = ({ children }) => {
         saveItem,
         formIsOpen: formOpen,
         changeFormOpenState,
-        initialData: toEditData,
+        initialItemData: toEditItemData,
+        initialProductData: toEditProductData,
         deletedItem,
         deleteItem,
       }}

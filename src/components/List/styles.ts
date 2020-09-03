@@ -45,7 +45,6 @@ export const ItemContainer = styled.a`
 export const TextContainer = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
   max-width: 75%;
   flex-direction: column;
   justify-content: space-between;

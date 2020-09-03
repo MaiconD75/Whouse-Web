@@ -8,6 +8,7 @@ export const Container = styled.ul`
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  max-width: 100vw;
   width: 100%;
   flex: 1;
   padding: 0.8rem;
