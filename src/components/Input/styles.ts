@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
+export interface IInputBlockProps {
+  invisible?: boolean;
+}
+
 export const InputBlock = styled.div`
   position: relative;
-  display: flex;
+  display: ${(props: IInputBlockProps) => (props.invisible ? 'none' : 'flex')};
   flex-direction: column;
 
   label {

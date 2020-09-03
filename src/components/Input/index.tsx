@@ -4,13 +4,14 @@ import { useField } from '@unform/core';
 import { InputBlock } from './styles';
 
 interface Props {
+  invisible?: boolean;
   name: string;
   label?: string;
 }
 
 type IInputProps = JSX.IntrinsicElements['input'] & Props;
 
-const Input: React.FC<IInputProps> = ({ name, label, ...rest }) => {
+const Input: React.FC<IInputProps> = ({ name, label, invisible, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -24,7 +25,7 @@ const Input: React.FC<IInputProps> = ({ name, label, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <InputBlock>
+    <InputBlock invisible={invisible}>
       {label && <label htmlFor={fieldName}>{label}</label>}
       {error && <span className="error">{error}</span>}
       <input

@@ -25,7 +25,7 @@ const Stock: React.FC = () => {
 
   const { params } = useRouteMatch<IStockParams>();
 
-  const { newItem, initialData, deletedItem } = useForm();
+  const { newItem, initialItemData, deletedItem } = useForm();
 
   useEffect(() => {
     async function loadStocks() {
@@ -47,16 +47,17 @@ const Stock: React.FC = () => {
       <Form
         itemType="stocks"
         unresetContent={{ warehouse_id: params.warehouseId }}
-        initialData={initialData}
+        initialData={initialItemData}
         schema={schema}
       >
+        <Input name="name" type="text" label="Nome" />
         <Input
           name="warehouse_id"
           type="hidden"
           value={params.warehouseId}
+          invisible
           readOnly
         />
-        <Input name="name" type="text" label="Nome" />
       </Form>
       <List URLLink="products" itemList={stocksList} />
       <AddButton>+</AddButton>
