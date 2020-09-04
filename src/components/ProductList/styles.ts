@@ -34,6 +34,30 @@ export const ImgContainer = styled.div`
   width: 4rem;
   height: 4rem;
   border-radius: 1.4rem;
+  display: flex;
+  position: relative;
+
+  label {
+    width: 1.4rem;
+    height: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props => props.theme.colors.secondaryDark};
+    border-radius: 0.7rem;
+    position: absolute;
+    left: -4px;
+    top: -4px;
+
+    svg {
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+
+    input {
+      display: none;
+    }
+  }
 
   img {
     width: 100%;

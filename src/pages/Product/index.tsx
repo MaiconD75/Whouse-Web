@@ -27,7 +27,7 @@ const Product: React.FC = () => {
 
   const { params } = useRouteMatch<IProductsParams>();
 
-  const { deletedItem, newItem, initialProductData } = useForm();
+  const { imageUpdated, deletedItem, newItem, initialProductData } = useForm();
 
   useEffect(() => {
     async function loadProducts() {
@@ -50,7 +50,7 @@ const Product: React.FC = () => {
     }
 
     loadProducts();
-  }, [deletedItem, newItem, params.stockId]);
+  }, [imageUpdated, deletedItem, newItem, params.stockId]);
 
   return (
     <>
