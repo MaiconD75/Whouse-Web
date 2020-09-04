@@ -75,7 +75,9 @@ const Product: React.FC = () => {
         <Input
           name="amount"
           type="hidden"
-          defaultValue={initialProductData?.amount}
+          defaultValue={
+            initialProductData?.amount ? initialProductData.amount : 0
+          }
           invisible
           readOnly
         />

@@ -1,12 +1,9 @@
 import React from 'react';
-import { FiSave } from 'react-icons/fi';
 
 import {
   ProductItem,
   ImgContainer,
   TextContent,
-  Amount,
-  SaveButton,
   EditContainer,
   EditButton,
 } from './styles';
@@ -14,6 +11,7 @@ import {
 import ListContainer from '../ListContainer';
 import IProductData from '../../utils/interfaces/IProductData';
 import { useForm } from '../../hooks/FormContext';
+import AmountForm from '../AmountForm';
 
 interface IProductsListProps {
   productList: [IProductData] | undefined;
@@ -35,14 +33,7 @@ const ProductList: React.FC<IProductsListProps> = ({ productList }) => {
             <span>{p.specification}</span>
           </TextContent>
           <EditContainer>
-            <Amount>
-              <button type="button">+</button>
-              <input defaultValue={p.amount} />
-              <button type="button">-</button>
-            </Amount>
-            <SaveButton>
-              <FiSave color="#EEE" fontSize="1rem" />
-            </SaveButton>
+            <AmountForm productData={p} />
             <EditButton
               type="button"
               onClick={() => changeFormOpenState(undefined, p)}
