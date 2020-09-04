@@ -21,6 +21,8 @@ interface IFormContextData {
   initialProductData: IProductData | undefined;
   formIsOpen: boolean;
   deletedItem: string | undefined;
+  imageUpdated: string;
+  UpdateImage(id: string): void;
   saveItem(credentials: ISaveCreditials): Promise<void>;
   deleteItem(credentials: IDeleteCreditials): Promise<void>;
   changeFormOpenState(
@@ -33,10 +35,15 @@ const FormContext = createContext<IFormContextData>({} as IFormContextData);
 
 const FormProvider: React.FC = ({ children }) => {
   const [savedItem, setSavedItem] = useState({});
+  const [itemImageUpdated, setItemImageUpdated] = useState('');
   const [deletedItem, setDeletedItem] = useState<string | undefined>('');
   const [formOpen, setFormOpen] = useState(false);
   const [toEditItemData, setToEditItemData] = useState<IItemData>();
   const [toEditProductData, setToEditProductData] = useState<IProductData>();
+
+  const UpdateImage = useCallback((id: string) => {
+    setItemImageUpdated(id);
+  }, []);
 
   const saveItem = useCallback(
     async ({ itemType, data, id }: ISaveCreditials) => {
@@ -81,6 +88,8 @@ const FormProvider: React.FC = ({ children }) => {
         initialProductData: toEditProductData,
         deletedItem,
         deleteItem,
+        UpdateImage,
+        imageUpdated: itemImageUpdated,
       }}
     >
       {children}
