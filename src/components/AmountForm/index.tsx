@@ -25,7 +25,7 @@ const schema = Yup.object().shape({
 const AmountForm: React.FC<IFormProps> = ({ productData }) => {
   const formRef = useRef<FormHandles>(null);
 
-  const { saveItem } = useForm();
+  const { updateAmount } = useForm();
 
   const handleSubmit: SubmitHandler<IFormData> = useCallback(
     async data => {
@@ -44,13 +44,13 @@ const AmountForm: React.FC<IFormProps> = ({ productData }) => {
 
         const newData = { ...productData, amount: data.amount };
 
-        saveItem({ itemType: 'products', data: newData, id });
+        updateAmount({ itemType: 'products', data: newData, id });
       } catch (err) {
         const errors = getvalidationError(err);
         formRef.current?.setErrors(errors);
       }
     },
-    [productData, saveItem],
+    [productData, updateAmount],
   );
 
   const handleSubmitsForm = useCallback(() => {

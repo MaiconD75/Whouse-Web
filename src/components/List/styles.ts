@@ -60,7 +60,7 @@ export const TextContainer = styled.div`
   }
 
   span {
-    color: ${props => props.theme.colors.textDark};
+    color: ${props => props.theme.colors.text};
     font-size: 0.8rem;
     overflow: hidden;
     text-overflow: ellipsis;

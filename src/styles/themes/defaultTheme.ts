@@ -7,8 +7,8 @@ export default {
     primary: '#2F3557',
     primaryDark: '#131624',
 
-    secondaryLight: '#E3AB00',
-    secondaryContrast: '#C9A73C',
+    secondaryLight: '#C9A73C',
+    secondaryContrast: '#E3AB00',
     secondary: '#C99D15',
     secondaryDark: '#967610',
 
