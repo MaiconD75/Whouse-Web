@@ -2,21 +2,27 @@ export default {
   title: 'defaultTheme',
 
   colors: {
-    primaryLight: '#2923E6',
-    primary: '#17198b',
-    primaryDark: '#151330',
+    primaryLight: '#404357',
+    primaryContrast: '#313A70',
+    primary: '#2F3557',
+    primaryDark: '#131624',
 
-    secondaryLight: '#E2C63F',
-    secondary: '#DEBA22',
-    secondaryDark: '#AA8700',
+    secondaryLight: '#E3AB00',
+    secondaryContrast: '#C9A73C',
+    secondary: '#C99D15',
+    secondaryDark: '#967610',
 
-    textLight: '#FFFFFF',
-    text: '#CFEFEF',
-    textDark: '#999',
-    textDarker: '#333',
+    backgroundLight: '#403E3D',
+    backgroundContrast: '#333230',
+    background: '#2E2A25',
+    backgroundDark: '#262524',
+
+    textLight: '#E3E6FB',
+    text: '#C2C4D2',
+    textDark: '#323541',
+    textDarker: '#212122',
 
     red: '#E4091C',
-    yellow: '#FAD137',
-    green: '#009a6b',
+    green: '#245937',
   },
 };

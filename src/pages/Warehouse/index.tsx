@@ -42,8 +42,8 @@ const Warehouse: React.FC = () => {
         <Input type="text" label="Nome" name="name" />
         <Input type="text" label="Descrição" name="description" />
       </Form>
-      <List itemList={warehousesList} URLLink="stocks" />
       <AddButton />
+      <List itemList={warehousesList} URLLink="stocks" />
     </>
   );
 };

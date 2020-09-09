@@ -12,17 +12,18 @@ export const Amount = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.4rem;
   padding-right: 0;
-  border-left: 1px solid ${props => props.theme.colors.primaryLight};
+  border-left: 1px solid ${props => props.theme.colors.secondaryContrast};
   align-items: center;
 
   button {
     border: none;
+    color: ${props => props.theme.colors.textDarker};
     border-radius: 50%;
     height: 1.2rem;
     width: 1.2rem;
     text-align: center;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: ${props => props.theme.colors.secondaryDark};
+    background-color: ${props => props.theme.colors.secondary};
   }
 `;

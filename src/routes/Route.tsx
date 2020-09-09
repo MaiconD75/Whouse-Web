@@ -5,15 +5,20 @@ import Layout from '../components/Layout';
 interface Props {
   component: React.FC;
   path: string;
+  withoutBack?: boolean;
   exact?: boolean;
 }
 
-const RouteWrapper: React.FC<Props> = ({ component: Component, ...rest }) => {
+const RouteWrapper: React.FC<Props> = ({
+  withoutBack,
+  component: Component,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
       render={props => (
-        <Layout {...props}>
+        <Layout {...props} withoutBack={withoutBack}>
           <Component />
         </Layout>
       )}

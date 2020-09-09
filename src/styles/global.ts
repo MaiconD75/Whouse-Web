@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import whouseBG from '../assets/Warehouse.png';
+
+import waveCM from '../assets/WaveCM.svg';
 
 export default createGlobalStyle`
   *{
@@ -7,24 +8,24 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    color: #eee;
   }
 
   body {
-    background-image: url(${whouseBG});
-    background-size: cover;
-    background-position: initial;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: ${props => props.theme.colors.primaryDark};
     -webkit-font-smoothing: antialiased;
     display: flex;
     flex: 1;
     min-height: 100vh;
+
+    @media (min-width: 700px) {
+    background-image: url(${waveCM});
+    background-size: 100vw;
+    background-color: ${props => props.theme.colors.background};
+    }
   }
 
   body, input, button {
     font: 1rem Roboto, sans-serif;
-    color: #eee;
   }
 
   #root {

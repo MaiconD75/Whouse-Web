@@ -6,12 +6,19 @@ declare module 'styled-components' {
 
     colors: {
       primaryLight: string;
+      primaryContrast: string;
       primary: string;
       primaryDark: string;
 
       secondaryLight: string;
+      secondaryContrast: string;
       secondary: string;
       secondaryDark: string;
+
+      backgroundLight: string;
+      backgroundContrast: string;
+      background: string;
+      backgroundDark: string;
 
       textLight: string;
       text: string;
@@ -19,7 +26,6 @@ declare module 'styled-components' {
       textDarker: string;
 
       red: string;
-      yellow: string;
       green: string;
     };
   }

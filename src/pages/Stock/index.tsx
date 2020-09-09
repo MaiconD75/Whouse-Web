@@ -59,8 +59,8 @@ const Stock: React.FC = () => {
           readOnly
         />
       </Form>
-      <List URLLink="products" itemList={stocksList} />
       <AddButton>+</AddButton>
+      <List URLLink="products" itemList={stocksList} />
     </>
   );
 };

@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex: 1;
 `;
 export const ProductItem = styled.li`
-  border: 3px solid ${props => props.theme.colors.primaryLight};
+  border: 2px solid ${props => props.theme.colors.primaryLight};
   background-color: ${props => props.theme.colors.primaryDark};
   height: 5.4rem;
   padding: 0.4rem;
@@ -30,7 +30,7 @@ export const ProductItem = styled.li`
 `;
 
 export const ImgContainer = styled.div`
-  border: 2px solid ${props => props.theme.colors.primary};
+  border: 2px solid ${props => props.theme.colors.primaryContrast};
   width: 4rem;
   height: 4rem;
   border-radius: 1.4rem;
@@ -38,20 +38,21 @@ export const ImgContainer = styled.div`
   position: relative;
 
   label {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.theme.colors.secondaryDark};
+    background-color: ${props => props.theme.colors.secondary};
     border-radius: 0.7rem;
     position: absolute;
-    left: -4px;
-    top: -4px;
+    left: -8px;
+    color: ${props => props.theme.colors.textDark};
+    top: -8px;
 
     svg {
-      width: 0.8rem;
-      height: 0.8rem;
+      width: 1rem;
+      height: 1rem;
     }
 
     input {
@@ -87,12 +88,12 @@ export const TextContent = styled.div`
   }
 
   strong {
-    color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.textLight};
     font-size: 1rem;
   }
 
   span {
-    color: ${props => props.theme.colors.textDark};
+    color: ${props => props.theme.colors.text};
     font-size: 0.6rem;
   }
 `;
@@ -105,12 +106,13 @@ export const EditContainer = styled.div`
 
 export const EditButton = styled.button`
   padding: 0 0.2rem;
-  margin-left: 0.2rem;
+  margin-left: 0.4rem;
   height: 1.6rem;
   display: flex;
   align-content: center;
+  font-size: 0.8rem;
   background-color: ${props => props.theme.colors.green};
-  color: ${props => props.theme.colors.textLight};
+  color: ${props => props.theme.colors.text};
   font-weight: bold;
   border: none;
   border-radius: 0.4rem;

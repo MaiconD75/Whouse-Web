@@ -2,8 +2,10 @@ import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import * as Yup from 'yup';
 
+import { FiXCircle } from 'react-icons/fi';
 import {
   Unform,
+  CloseButton,
   UnformModal,
   InputContainer,
   ButtonContainer,
@@ -59,6 +61,8 @@ const Form: React.FC<IFormProps> = ({
 
         saveItem({ itemType, data, id });
 
+        changeFormOpenState();
+
         if (!initialData) {
           reset(unresetContent);
         }
@@ -68,7 +72,14 @@ const Form: React.FC<IFormProps> = ({
         formRef.current?.setErrors(errors);
       }
     },
-    [schema, saveItem, itemType, initialData, unresetContent],
+    [
+      schema,
+      saveItem,
+      itemType,
+      initialData,
+      changeFormOpenState,
+      unresetContent,
+    ],
   );
   return (
     <>
@@ -78,6 +89,9 @@ const Form: React.FC<IFormProps> = ({
         onClose={() => changeFormOpenState()}
       >
         <div>
+          <CloseButton type="button" onClick={() => changeFormOpenState()}>
+            <FiXCircle />
+          </CloseButton>
           <Unform
             autoComplete="off"
             initialData={initialData}

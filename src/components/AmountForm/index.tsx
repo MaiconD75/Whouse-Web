@@ -30,7 +30,7 @@ const AmountForm: React.FC<IFormProps> = ({ productData }) => {
   const handleSubmit: SubmitHandler<IFormData> = useCallback(
     async data => {
       if (data.amount < 0) {
-        formRef.current?.setFieldValue('amount', '');
+        formRef.current?.setFieldValue('amount', productData.amount);
       }
 
       try {

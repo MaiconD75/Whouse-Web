@@ -1,16 +1,35 @@
 import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
 
-import { Background, MainContainer } from './styles';
+import {
+  Page,
+  BackButton,
+  Background,
+  MainContainer,
+  HeaderContainer,
+} from './styles';
 
+interface ILayoutProps {
+  withoutBack?: boolean;
+}
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<ILayoutProps> = ({ withoutBack, children }) => {
+  const { goBack } = useHistory();
 
   return (
-    <Background>
-      <MainContainer>
-        {children}
-      </MainContainer>
-    </Background>
+    <Page>
+      <HeaderContainer>
+        {!withoutBack && (
+          <BackButton onClick={goBack}>
+            <FiArrowLeft />
+          </BackButton>
+        )}
+      </HeaderContainer>
+      <Background>
+        <MainContainer>{children}</MainContainer>
+      </Background>
+    </Page>
   );
 };
 
