@@ -3,6 +3,7 @@ import api from '../services/api';
 
 import IItemData from '../utils/interfaces/IItemData';
 import IProductData from '../utils/interfaces/IProductData';
+import { useToast } from './ToastContext';
 
 interface ISaveCreditials {
   itemType: string;
@@ -24,6 +25,7 @@ interface IFormContextData {
   imageUpdated: string;
   UpdateImage(id: string): void;
   saveItem(credentials: ISaveCreditials): Promise<void>;
+  updateAmount(credentials: ISaveCreditials): Promise<void>;
   deleteItem(credentials: IDeleteCreditials): Promise<void>;
   changeFormOpenState(
     initialItemData?: IItemData,
@@ -41,21 +43,11 @@ const FormProvider: React.FC = ({ children }) => {
   const [toEditItemData, setToEditItemData] = useState<IItemData>();
   const [toEditProductData, setToEditProductData] = useState<IProductData>();
 
+  const { addToast } = useToast();
+
   const UpdateImage = useCallback((id: string) => {
     setItemImageUpdated(id);
   }, []);
-
-  const saveItem = useCallback(
-    async ({ itemType, data, id }: ISaveCreditials) => {
-      if (!id) {
-        await api.post(itemType, data);
-      } else {
-        await api.put(itemType, { ...data, id });
-      }
-      setSavedItem(data);
-    },
-    [],
-  );
 
   const changeFormOpenState = useCallback(
     (initialItemData?: IItemData, initialProductData?: IProductData) => {
@@ -68,13 +60,65 @@ const FormProvider: React.FC = ({ children }) => {
     [formOpen],
   );
 
+  const saveItem = useCallback(
+    async ({ itemType, data, id }: ISaveCreditials) => {
+      try {
+        if (!id) {
+          await api.post(itemType, data);
+        } else {
+          await api.put(itemType, { ...data, id });
+        }
+        setSavedItem(data);
+
+        const messageTitle = id
+          ? `Atualização bem sucedida!`
+          : `Cadastro concluido com sucesso!`;
+
+        addToast({
+          type: 'success',
+          title: messageTitle,
+        });
+
+        changeFormOpenState();
+      } catch (err) {
+        const messageTitle = id ? `Erro ao atualizar!` : `Falha no cadastro!`;
+
+        if (err.response) {
+          addToast({
+            type: 'error',
+            title: messageTitle,
+            description: err.response.data.message,
+          });
+        } else {
+          addToast({
+            type: 'error',
+            title: 'Internal Server Error',
+          });
+        }
+      }
+    },
+    [changeFormOpenState, addToast],
+  );
+  const updateAmount = useCallback(
+    async ({ itemType, data, id }: ISaveCreditials) => {
+      await api.put(itemType, { ...data, id });
+      setSavedItem(data);
+    },
+    [],
+  );
+
   const deleteItem = useCallback(
     async ({ id, itemType }: IDeleteCreditials) => {
       await api.delete(itemType, { data: { id } });
       changeFormOpenState();
       setDeletedItem(id);
+
+      addToast({
+        type: 'success',
+        title: 'Item excluido!',
+      });
     },
-    [changeFormOpenState],
+    [changeFormOpenState, addToast],
   );
 
   return (
@@ -82,6 +126,7 @@ const FormProvider: React.FC = ({ children }) => {
       value={{
         newItem: savedItem,
         saveItem,
+        updateAmount,
         formIsOpen: formOpen,
         changeFormOpenState,
         initialItemData: toEditItemData,

@@ -65,7 +65,7 @@ const ProductList: React.FC<IProductsListProps> = ({ productList }) => {
               type="button"
               onClick={() => changeFormOpenState(undefined, p)}
             >
-              editar
+              Editar
             </EditButton>
           </EditContainer>
         </ProductItem>

@@ -82,8 +82,8 @@ const Product: React.FC = () => {
           readOnly
         />
       </Form>
-      <ProductList productList={productList} />
       <AddButton />
+      <ProductList productList={productList} />
     </>
   );
 };

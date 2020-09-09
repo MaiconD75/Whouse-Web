@@ -2,8 +2,10 @@ import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import * as Yup from 'yup';
 
+import { FiXCircle } from 'react-icons/fi';
 import {
   Unform,
+  CloseButton,
   UnformModal,
   InputContainer,
   ButtonContainer,
@@ -11,6 +13,7 @@ import {
 } from './styles';
 
 import { useForm } from '../../hooks/FormContext';
+import { useToast } from '../../hooks/ToastContext';
 
 import getvalidationError from '../../utils/getValidationErrors';
 import IItemData from '../../utils/interfaces/IItemData';
@@ -37,6 +40,7 @@ const Form: React.FC<IFormProps> = ({
   const formRef = useRef<FormHandles>(null);
 
   const { saveItem, formIsOpen, changeFormOpenState, deleteItem } = useForm();
+  const { addToast } = useToast();
 
   useEffect(() => {
     if (initialData) {
@@ -58,7 +62,6 @@ const Form: React.FC<IFormProps> = ({
         const id = initialData?.id;
 
         saveItem({ itemType, data, id });
-
         if (!initialData) {
           reset(unresetContent);
         }
@@ -66,9 +69,15 @@ const Form: React.FC<IFormProps> = ({
         const errors = getvalidationError(err);
 
         formRef.current?.setErrors(errors);
+
+        addToast({
+          type: 'error',
+          title: `Erro ao cadastrar!`,
+          description: 'ocorreu um erro no cadastro, cheque as credenciais',
+        });
       }
     },
-    [schema, saveItem, itemType, initialData, unresetContent],
+    [schema, saveItem, itemType, addToast, initialData, unresetContent],
   );
   return (
     <>
@@ -78,6 +87,9 @@ const Form: React.FC<IFormProps> = ({
         onClose={() => changeFormOpenState()}
       >
         <div>
+          <CloseButton type="button" onClick={() => changeFormOpenState()}>
+            <FiXCircle />
+          </CloseButton>
           <Unform
             autoComplete="off"
             initialData={initialData}

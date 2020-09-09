@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Item = styled.div`
   display: flex;
   overflow: none;
+  width: 100%;
   flex-direction: row;
-  justify-content: space-around;
 
   & + div {
     margin-top: 0.8rem;
@@ -18,24 +18,24 @@ export const Item = styled.div`
 `;
 
 export const ItemContainer = styled.a`
-  border: 3px solid ${props => props.theme.colors.primaryLight};
+  border: 2px solid ${props => props.theme.colors.primaryContrast};
   background-color: ${props => props.theme.colors.primaryDark};
-  width: 80%;
+  flex: 1;
+  margin-right: 1rem;
+  width: calc(100% - 5rem);
   height: 5.4rem;
   padding: 0.8rem;
   border-radius: 0.8rem;
   text-decoration: none;
-  margin-right: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 0.5rem #372e6132;
+  box-shadow: 0 0 0.8rem #372e6132;
   transition: 250ms;
 
   @media (min-width: 700px) {
     &:hover {
-      box-shadow: -1rem 1rem 1rem #372e6132;
-      transform: translate(1rem, -1rem);
+      transform: translate(0.2rem, -0.2rem);
     }
   }
 
@@ -45,7 +45,8 @@ export const ItemContainer = styled.a`
 export const TextContainer = styled.div`
   display: flex;
   flex: 1;
-  max-width: 75%;
+  max-width: 85%;
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
 
@@ -59,7 +60,7 @@ export const TextContainer = styled.div`
   }
 
   span {
-    color: ${props => props.theme.colors.textDark};
+    color: ${props => props.theme.colors.text};
     font-size: 0.8rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -70,21 +71,19 @@ export const TextContainer = styled.div`
 `;
 
 export const EditButton = styled.button`
-  position: static;
-  border: 3px solid ${props => props.theme.colors.secondary};
+  border: 2px solid ${props => props.theme.colors.secondary};
   background-color: ${props => props.theme.colors.primaryDark};
   display: flex;
-  width: 15%;
+  width: 4rem;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 0.8rem #372e6132;
   border-radius: 3rem 0 0 3rem;
-  box-shadow: 0 0 0.5rem #3e481991;
   transition: 250ms;
 
   @media (min-width: 700px) {
     &:hover {
-      box-shadow: -1rem 1rem 1rem #3e481991;
-      transform: translate(1rem, -1rem);
+      transform: translate(0.2rem, -0.2rem);
     }
   }
 `;

@@ -2,19 +2,21 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import Routes from './routes/index';
 import defaultTheme from './styles/themes/defaultTheme';
 import GlobalStyle from './styles/global';
-import { FormProvider } from './hooks/FormContext';
+
+import Routes from './routes/index';
+
+import AppProvider from './hooks';
 
 const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
         <BrowserRouter>
-          <FormProvider>
+          <AppProvider>
             <Routes />
-          </FormProvider>
+          </AppProvider>
         </BrowserRouter>
         <GlobalStyle />
       </ThemeProvider>

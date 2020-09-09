@@ -12,7 +12,7 @@ export const InputBlock = styled.div`
   label {
     font-size: 1rem;
     color: ${props => props.theme.colors.textLight};
-    border-bottom: 1px solid ${props => props.theme.colors.secondaryDark};
+    border-bottom: 2px solid ${props => props.theme.colors.secondaryContrast};
     padding-bottom: 0.4rem;
     margin-bottom: 0.4rem;
   }
